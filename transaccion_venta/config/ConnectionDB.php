@@ -12,7 +12,7 @@ class ConnectionDB
     {
         $servername = "localhost";
         $username = "root";
-        $password = "mysql";
+        $password = "";
         $database = "terceriza";
         $this->servername = $servername;
         $this->username = $username;
