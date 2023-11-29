@@ -76,7 +76,7 @@
                                     de Documento(*)</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-boxes"></i></span><input
-                                            class="form-control" type="text" id="id_numero_documento"
+                                            class="form-control" type="number" id="id_numero_documento"
                                             name="numero_documento" autocomplete="off"
                                             disabled
                                     >
