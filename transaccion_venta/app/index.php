@@ -21,7 +21,6 @@
     </div>
 </div>
 <div id="mensajeRegistroExitoso"></div>
-<div class="container" style="margin-top: 4%"></div>
 <div class="container" style="margin-top: 1%">
     <div class="panel panel-default">
         <div class="panel-heading">Datos Clientes</div>
@@ -154,9 +153,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" >
 
-                            <div class="form-group col-md-6" id="id_nro_sn_div">
+                            <div class="form-group col-md-6" id="id_nro_sn_div" style="display: none;">
                                 <label class="control-label" for="id_nro_sn">Nro. SN(*)</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-boxes"></i></span><input
@@ -166,7 +165,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6" id="id_activacion_inmediata_div">
+                            <div class="form-group col-md-6" id="id_activacion_inmediata_div" style="display: none;" >
                                 <label class="control-label" for="id_activacion_inmediata">Activaci&oacute;n
                                     Inmediata(*)</label>
                                 <div class="input-group">
@@ -243,6 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
 
 }
 ?>
+</div>
 </div>
 </div>
 <script type="text/javascript">
@@ -340,6 +340,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
         var inmediata = document.getElementById("id_activacion_inmediata_div");
         var nro_sn = document.getElementById("id_nro_sn_div");
 
+
         document.getElementById("id_error_numero_documento").innerText = "";
         numeroDocumentoInput.classList.remove("is-invalid");
         // Limpiar el contenido del campo
@@ -349,8 +350,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
             // Si el tipo de documento es vacío, deshabilitar el campo y limpiar el contenido
             numeroDocumentoInput.disabled = true;
             numeroDocumentoInput.value = "";
-            nro_sn.style.display = "block";
-            inmediata.style.display = "block";
+            nro_sn.style.display = "none";
+            inmediata.style.display = "none";
         } else {
             // Si el tipo de documento no es vacío, habilitar el campo
             numeroDocumentoInput.disabled = false;
