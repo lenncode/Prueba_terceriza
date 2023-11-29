@@ -10,8 +10,8 @@
 <body>
 <div class="row">
     <div class="col-sm-3 btn btn-primary">
-            <i class="bi bi-people-fill"></i>
-            <span>Datos de Clientes</span>
+        <i class="bi bi-people-fill"></i>
+        <span>Datos de Clientes</span>
     </div>
     <div class="col-sm-3">
         <a href="views/seguimientoVentas.php" class="btn btn-primary">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="control-label"   type="number" for="id_numero_documento">N&uacute;mero
+                                <label class="control-label" type="number" for="id_numero_documento">N&uacute;mero
                                     de Documento(*)</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-boxes"></i></span><input
@@ -153,7 +153,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" >
+                        <div class="row">
 
                             <div class="form-group col-md-6" id="id_nro_sn_div" style="display: none;">
                                 <label class="control-label" for="id_nro_sn">Nro. SN(*)</label>
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6" id="id_activacion_inmediata_div" style="display: none;" >
+                            <div class="form-group col-md-6" id="id_activacion_inmediata_div" style="display: none;">
                                 <label class="control-label" for="id_activacion_inmediata">Activaci&oacute;n
                                     Inmediata(*)</label>
                                 <div class="input-group">
@@ -261,11 +261,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
             // Agregar opciones para nivel_dos si nivelUno es 1
             nivelDos.innerHTML += '<option value="1">Venta</option>';
             nivelDos.innerHTML += '<option value="2">Agendado</option>';
+            document.getElementById("id_nivel_dos").classList.add("is-invalid");
+            document.getElementById("id_nivel_tres").classList.add("is-invalid");
         } else if (nivelUno === "2") {
             // Agregar opciones para nivel_dos si nivelUno es 2
             nivelDos.innerHTML += '<option value="1">No venta</option>';
             nivelDos.innerHTML += '<option value="2">No llamar</option>';
             nivelDos.innerHTML += '<option value="3">Llamada Vicio</option>';
+            document.getElementById("id_nivel_dos").classList.add("is-invalid");
+            document.getElementById("id_nivel_tres").classList.add("is-invalid");
         }
     }
 
@@ -283,19 +287,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
         var nivelDosValue = nivelDos.value;
         if (nivelUno === "1" && nivelDosValue === "1") {
             nivelTres.innerHTML += '<option value="1">Acepta upgrade</option>';
+            document.getElementById("id_nivel_tres").classList.add("is-invalid");
         } else if (nivelUno === "1" && nivelDosValue === "2") {
             nivelTres.innerHTML += '<option value="1">Renovación de equipo</option>';
             nivelTres.innerHTML += '<option value="2">Acepta upgrade + Renovación de equipo</option>';
             nivelTres.innerHTML += '<option value="3">Cliente interesado</option>';
+            document.getElementById("id_nivel_tres").classList.add("is-invalid");
         } else if (nivelUno === "2" && nivelDosValue === "1") {
             nivelTres.innerHTML += '<option value="1">Corta llamada </option>';
             nivelTres.innerHTML += '<option value="2">Plan muy caro </option>';
             nivelTres.innerHTML += '<option value="3">Buzón </option>';
+            document.getElementById("id_nivel_tres").classList.add("is-invalid");
         } else if (nivelUno === "2" && nivelDosValue === "2") {
             nivelTres.innerHTML += '<option value="1">Cliente no desea recibir llamadas </option>';
+            document.getElementById("id_nivel_tres").classList.add("is-invalid");
 
         } else if (nivelUno === "2" && nivelDosValue === "3") {
             nivelTres.innerHTML += '<option value="1">Llamada vacía  </option>';
+            document.getElementById("id_nivel_tres").classList.add("is-invalid");
 
         }
     }
@@ -427,6 +436,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
 </script>
 <script>
     document.getElementById("id_registrar").disabled = true;
+
     function validarCampo(campoId, valor) {
         const elementoCampo = document.getElementById(campoId);
         if (valor === "") {
@@ -437,6 +447,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
             elementoCampo.classList.add("is-valid");
         }
     }
+
     // Función para validar los campos y activar/desactivar el botón
     function validarCampos() {
 
@@ -450,10 +461,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
         var tipoDocumento = document.getElementById("id_tipo_documento").value;
         var tipoPlan = document.getElementById("id_tipo_plan").value;
         var telefono = document.getElementById("id_telefono").value;
+        var act_inmediata = document.getElementById("id_activacion_inmediata").value;
 
         // Validar que todos los campos obligatorios estén llenos
 
-
+        if (tipoDocumento === "2" && act_inmediata === "-1") {
+            document.getElementById("id_activacion_inmediata").classList.add("is-invalid");
+        } else if (tipoDocumento === "2" && act_inmediata !== "-1") {
+            document.getElementById("id_activacion_inmediata").classList.remove("is-invalid");
+            document.getElementById("id_activacion_inmediata").classList.add("is-valid");
+        }
+        if (nombres.length < 2) {
+            document.getElementById("id_nombres").classList.add("is-invalid");
+        } else if (nombres.length >= 2) {
+            document.getElementById("id_nombres").classList.remove("is-invalid");
+            document.getElementById("id_nombres").classList.add("is-valid");
+        }
+        if (apellidos.length < 2) {
+            document.getElementById("id_apellidos").classList.add("is-invalid");
+        } else if (apellidos.length >= 2) {
+            document.getElementById("id_apellidos").classList.remove("is-invalid");
+            document.getElementById("id_apellidos").classList.add("is-valid");
+        }
+        if (numeroDocumento.length === 0) {
+            document.getElementById("id_numero_documento").classList.add("is-invalid");
+        }
+        if (telefono.length === 0) {
+            document.getElementById("id_telefono").classList.add("is-invalid");
+        }
         validarCampo("id_tipo_documento", tipoDocumento);
         validarCampo("id_nivel_uno", nivelUno);
         validarCampo("id_nivel_dos", nivelDos);
@@ -462,8 +497,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
         if (nivelTres && nivelDos && nivelUno && apellidos && nombres && numeroDocumento && tipoDocumento && tipoPlan && telefono) {
             // Si todos los campos están llenos, habilitar el botón
             document.getElementById("id_registrar").disabled = false;
+
+
         } else {
-            // Si algún campo está vacío, deshabilitar el botón
+
+
             document.getElementById("id_registrar").disabled = true;
         }
     }
@@ -478,6 +516,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
     document.getElementById("id_tipo_documento").addEventListener("input", validarCampos);
     document.getElementById("id_tipo_plan").addEventListener("input", validarCampos);
     document.getElementById("id_telefono").addEventListener("input", validarCampos);
+    document.getElementById("id_activacion_inmediata").addEventListener("input", validarCampos);
 </script>
 </body>
 </html>
