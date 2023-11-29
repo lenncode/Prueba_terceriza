@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
-<h1>Datos Clientes - Ventas</h1>
 <div class="row">
     <div class="col-sm-3 btn btn-primary">
             <i class="bi bi-people-fill"></i>
@@ -16,12 +15,10 @@
     </div>
     <div class="col-sm-3">
         <a href="views/seguimientoVentas.php" class="btn btn-primary">
-            <i class="bi bi-people-fill"></i>
+            <i class="bi bi-card-checklist"></i>
             <span>Seguimiento Ventas</span>
         </a>
     </div>
-
-
 </div>
 <div id="mensajeRegistroExitoso"></div>
 <div class="container" style="margin-top: 4%"></div>
