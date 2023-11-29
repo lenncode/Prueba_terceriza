@@ -427,7 +427,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
 </script>
 <script>
     document.getElementById("id_registrar").disabled = true;
-
+    function validarCampo(campoId, valor) {
+        const elementoCampo = document.getElementById(campoId);
+        if (valor === "") {
+            elementoCampo.classList.add("is-invalid");
+            elementoCampo.classList.remove("is-valid");
+        } else {
+            elementoCampo.classList.remove("is-invalid");
+            elementoCampo.classList.add("is-valid");
+        }
+    }
     // Función para validar los campos y activar/desactivar el botón
     function validarCampos() {
 
@@ -443,15 +452,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
         var telefono = document.getElementById("id_telefono").value;
 
         // Validar que todos los campos obligatorios estén llenos
-        if (tipoDocumento=== "") {
 
-            document.getElementById("id_tipo_documento").classList.add("is-invalid");
 
-        }if (tipoPlan=== "") {
-
-            document.getElementById("id_tipo_plan").classList.add("is-invalid");
-
-        }
+        validarCampo("id_tipo_documento", tipoDocumento);
+        validarCampo("id_nivel_uno", nivelUno);
+        validarCampo("id_nivel_dos", nivelDos);
+        validarCampo("id_nivel_tres", nivelTres);
+        validarCampo("id_tipo_plan", tipoPlan);
         if (nivelTres && nivelDos && nivelUno && apellidos && nombres && numeroDocumento && tipoDocumento && tipoPlan && telefono) {
             // Si todos los campos están llenos, habilitar el botón
             document.getElementById("id_registrar").disabled = false;
