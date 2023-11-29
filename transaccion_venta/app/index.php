@@ -212,10 +212,7 @@
 include("../config/ConnectionDB.php");
 include("controllers/registroClienteController.php");
 
-// Verifica si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
-    // Conexión a la base de datos (modifica los detalles según tu configuración)
-
 
     // Recupera los valores del formulario
     $telefono = $_POST["numero"];
@@ -238,7 +235,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
     $mensaje = $registroCliente->registrarCliente($telefono, $tipoSala, $tipoDocumento, $numeroDocumento, $nombres, $apellidos, $nivelUno, $nivelDos, $nivelTres, $nroSn, $activacionInmediata, $observaciones);
 
     // Muestra el mensaje resultante
-    echo "<div class='alert'>" . $mensaje . "</div>";
+    echo "<script type='text/javascript'>alert('$mensaje');</script>";
 
 }
 ?>
