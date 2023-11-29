@@ -23,7 +23,7 @@
 <div id="mensajeRegistroExitoso"></div>
 <div class="container" style="margin-top: 1%">
     <div class="panel panel-default">
-        <div class="panel-heading">Datos Clientes</div>
+        <div class="panel-heading h3">Datos Clientes</div>
         <div class="panel-body">
             <p id="mensaje">Completa todos los campos para habilitar el botón de registro.</p>
 
@@ -34,7 +34,7 @@
                             <label class="control-label" for="id_telefono">Teléfono(*)</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-boxes"></i></span><input
-                                        class="form-control" type="text" id="id_telefono"
+                                        class="form-control" maxlength="9" type="number" id="id_telefono"
                                         name="numero" autocomplete="off">
                             </div>
                             <div class="text-danger" id="id_error_telefono"></div>
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="control-label" for="id_numero_documento">N&uacute;mero
+                                <label class="control-label"   type="number" for="id_numero_documento">N&uacute;mero
                                     de Documento(*)</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-boxes"></i></span><input
@@ -403,6 +403,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
             // Limpiar el mensaje de error y el estilo si la longitud es correcta
             document.getElementById("id_error_numero_documento").innerText = "";
             document.getElementById("id_numero_documento").classList.remove("is-invalid");
+            document.getElementById("id_numero_documento").classList.add("is-valid");
         }
     });
 </script>
@@ -420,6 +421,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
             // Limpiar el mensaje de error y el estilo si la longitud es correcta
             document.getElementById("id_error_telefono").innerText = "";
             document.getElementById("id_telefono").classList.remove("is-invalid");
+            document.getElementById("id_telefono").classList.add("is-valid");
         }
     });
 </script>
@@ -441,6 +443,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["registroCliente"])) {
         var telefono = document.getElementById("id_telefono").value;
 
         // Validar que todos los campos obligatorios estén llenos
+        if (tipoDocumento=== "") {
+
+            document.getElementById("id_tipo_documento").classList.add("is-invalid");
+
+        }if (tipoPlan=== "") {
+
+            document.getElementById("id_tipo_plan").classList.add("is-invalid");
+
+        }
         if (nivelTres && nivelDos && nivelUno && apellidos && nombres && numeroDocumento && tipoDocumento && tipoPlan && telefono) {
             // Si todos los campos están llenos, habilitar el botón
             document.getElementById("id_registrar").disabled = false;
